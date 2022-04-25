@@ -2,6 +2,8 @@
 
 namespace App;
 
+use SponsoMetaBox;
+
 //fonctionalites supportées par le theme
 function montheme_supports()
 {
@@ -10,6 +12,8 @@ function montheme_supports()
     add_theme_support('menus');
     register_nav_menu('header', 'En tête du menu');
     register_nav_menu('footer', 'Pied de page');
+
+    add_image_size('card-header','300','215',true);
 }
 function montheme_register_assets()
 {
@@ -62,6 +66,8 @@ function montheme_pagination()
     echo '</nav>';
 }
 
+
+
 /**  actions */
 add_action('after_setup_theme', 'App\montheme_supports');
 add_action('wp_enqueue_scripts', 'App\montheme_register_assets');
@@ -69,3 +75,6 @@ add_filter('document_title_separator', 'App\mon_theme_title_separator');
 add_filter('document_title_parts', 'App\montheme_document_title_parts');
 add_filter('nav_menu_css_class', 'App\montheme_menu_class');
 add_filter('nav_menu_link_attributes', 'App\montheme_menu_link_class');
+
+require_once('metaboxes/sponso.php');
+SponsoMetaBox::register();

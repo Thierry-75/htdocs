@@ -3,9 +3,9 @@
 <?php if (have_posts()) : ?>
     <div class="row">
         <?php while (have_posts()) : the_post() ?>
-            <div class="col sm-2">
+            <div class="col sm-2 my-2">
                 <div class="card" style="width: 18rem; height: 450px">
-                    <?php the_post_thumbnail('medium', ['class' => 'card-img-top', 'alt' => '', 'style' => 'height:auto']) ?>
+                    <?php the_post_thumbnail('card-header', ['class' => 'card-img-top', 'alt' => '', 'style' => 'height:auto']) ?>
                     
                     <div class="card-body">
                         <h4 class="card-title"><?php the_title() ?></h4>
@@ -17,7 +17,6 @@
                 </div>
             </div>
         <?php endwhile ?>
-
     </div>
     
     <?php App\montheme_pagination() ?>
