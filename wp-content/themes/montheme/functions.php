@@ -2,6 +2,7 @@
 
 namespace App;
 
+use AgenceMenuPage;
 use SponsoMetaBox;
 
 //fonctionalites supportées par le theme
@@ -86,6 +87,16 @@ function montheme_init()
         'show_admin_column' => true,
 
     ]);
+    register_post_type('chalet',
+        ['label'=>'Chalet',
+        'public'=>true,
+        'menu_position'=> 3,
+        'menu_icon'=>'dashicons-admin-multisite',
+        'supports'=>['title','editor','thumbnail','comments','author'],
+        'show_in_rest'=>true,
+        'has_archive'=>true,
+
+        ]);
 }
 
 
@@ -99,4 +110,7 @@ add_filter('nav_menu_css_class', 'App\montheme_menu_class');
 add_filter('nav_menu_link_attributes', 'App\montheme_menu_link_class');
 
 require_once('metaboxes/sponso.php');
+require_once('options/agence.php');
+
 SponsoMetaBox::register();
+AgenceMenuPage::register();
