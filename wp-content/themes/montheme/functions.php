@@ -13,7 +13,7 @@ function montheme_supports()
     register_nav_menu('header', 'En tête du menu');
     register_nav_menu('footer', 'Pied de page');
 
-    add_image_size('card-header','300','215',true);
+    add_image_size('card-header', '300', '215', true);
 }
 function montheme_register_assets()
 {
@@ -46,9 +46,9 @@ function montheme_menu_link_class(array $attrs): array
 function montheme_pagination()
 {
     $pages = paginate_links(['type' => 'array']);
-        if($pages ===null){
-            return;
-        }
+    if ($pages === null) {
+        return;
+    }
     echo '<nav aria-label="Pagination" class="my-4">';
     echo '<ul class="pagination">';
 
@@ -58,7 +58,7 @@ function montheme_pagination()
         if ($active) {
             $class .= ' active';
         }
-        echo '<li class="' . $class .'">';
+        echo '<li class="' . $class . '">';
         echo str_replace('page-numbers', 'page-link', $page);
         echo '</li>';
     }
@@ -66,9 +66,31 @@ function montheme_pagination()
     echo '</nav>';
 }
 
+function montheme_init()
+{
+    register_taxonomy('science', 'post', [
+        'labels' => [
+            'name' => 'Science',
+            'singular_name'     => 'Science',
+            'plural_name'       => 'Sciences',
+            'search_items'      => 'Rechercher des sciences',
+            'all_items'         => 'Toutes les sciences',
+            'edit_item'         => 'Editer la science',
+            'update_item'       => 'Mettre à jour la science',
+            'add_new_item'      => 'Ajouter une science nouvelle',
+            'new_item_name'     => 'Ajouter une science nouvelle',
+            'menu_name'         => 'Science',
+        ],
+        'show_in_rest' => true,
+        'hierarchical' => true,
+        'show_admin_column' => true,
+
+    ]);
+}
 
 
 /**  actions */
+add_action('init', 'App\montheme_init');
 add_action('after_setup_theme', 'App\montheme_supports');
 add_action('wp_enqueue_scripts', 'App\montheme_register_assets');
 add_filter('document_title_separator', 'App\mon_theme_title_separator');

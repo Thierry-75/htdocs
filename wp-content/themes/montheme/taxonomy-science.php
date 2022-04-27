@@ -1,7 +1,13 @@
 <?php get_header() ?> <!-- appel du header-->
 
+<h1 class="text-center"><?= esc_html(get_queried_object()->name) ?></h1>
+<p class="text-center">
+<?= esc_html(get_queried_object()->description) ?>
+</p>
+
 <!-- Creation taxonomy -->
 <?php $sciences = get_terms(['taxonomy'=>'science']); ?>
+<?php if(is_array($sciences)): ?>
 <ul class="nav nav-pills my-4">
     <?php foreach($sciences as $science): ?>
         <li class="nav-item">
@@ -10,7 +16,7 @@
         </li>
         <?php endforeach ?>
 </ul>
-
+<?php endif ?>
 <?php if (have_posts()) : ?>
     <div class="row">
         <?php while (have_posts()) : the_post() ?>
