@@ -19,7 +19,7 @@ class SponsoMetaBox
         }
     }
 
-    public static function render($post)
+    public static function render(object $post)
     {
         $value = get_post_meta($post->ID, self::META_KEY, true);
         wp_nonce_field(self::NONCE,self::NONCE);
