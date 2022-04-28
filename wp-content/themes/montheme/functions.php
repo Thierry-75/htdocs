@@ -21,7 +21,7 @@ function montheme_register_assets()
     wp_register_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css');
     wp_register_script('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js', ['popper'], false, true);
     wp_register_script('popper', 'https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js', [], false, true);
-    wp_deregister_script('jquery');
+    //wp_deregister_script('jquery');
     wp_enqueue_style('bootstrap');
     wp_enqueue_script('bootstrap');
 }
@@ -158,6 +158,18 @@ add_filter('manage_post_posts_custom_column', function($column, $postId){
     }
 },10,2);
 
+function montheme_register_widget () {
+    register_sidebar([
+        'id' => 'homepage',
+        'name' => 'Sidebar Accueil',
+        'before_widget' => '<div class="p-4 %2$s" id="%1$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h4 class="font-italic">',
+        'after_title' => '</h4>'
+    ]);
+}
+add_action('widgets_init', 'montheme_register_widget'); 
+
 /* 
 Dans ce chapitre nous allons parler du hook pre_get_posts. Ce hook permet d'altérer une requête avant son éxécution 
 et va notamment permettre d'altérer la requête principale de WordPress pour y ajouter des filtres spécifiques.
@@ -184,3 +196,4 @@ add_action('pre_get_posts', 'montheme_pre_get_posts');
 }
 add_filter('query_vars', 'montheme_query_vars');
 */
+
