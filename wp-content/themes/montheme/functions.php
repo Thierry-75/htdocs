@@ -10,6 +10,7 @@ function montheme_supports()
 {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
+    add_theme_support('widgets');
     add_theme_support('menus');
     register_nav_menu('header', 'En tête du menu');
     register_nav_menu('footer', 'Pied de page');
@@ -158,42 +159,4 @@ add_filter('manage_post_posts_custom_column', function($column, $postId){
     }
 },10,2);
 
-function montheme_register_widget () {
-    register_sidebar([
-        'id' => 'homepage',
-        'name' => 'Sidebar Accueil',
-        'before_widget' => '<div class="p-4 %2$s" id="%1$s">',
-        'after_widget' => '</div>',
-        'before_title' => '<h4 class="font-italic">',
-        'after_title' => '</h4>'
-    ]);
-}
-add_action('widgets_init', 'montheme_register_widget'); 
-
-/* 
-Dans ce chapitre nous allons parler du hook pre_get_posts. Ce hook permet d'altérer une requête avant son éxécution 
-et va notamment permettre d'altérer la requête principale de WordPress pour y ajouter des filtres spécifiques.
-
-function montheme_pre_get_posts ($query) {
-    if (is_admin() || !is_search() || !$query->is_main_query()) {
-        return;
-    }
-    if (get_query_var('sponso') === '1') {
-        $meta_query = $query->get('meta_query', []);
-        $meta_query[] = [
-            'key' => SponsoMetaBox::META_KEY,
-            'compare' => 'EXISTS',
-        ];
-        $query->set('meta_query', $meta_query);
-    }
-}
-add_action('pre_get_posts', 'montheme_pre_get_posts');
- * 
- *  UTILISER LE FITRE query_vars pour permettre de gérer de nouveaux mots clef au niveau de l'url
- *  function montheme_query_vars ($params) {
-    $params[] = 'sponso';
-    return $params;
-}
-add_filter('query_vars', 'montheme_query_vars');
-*/
 
